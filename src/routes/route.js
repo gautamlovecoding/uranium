@@ -1,31 +1,76 @@
 const express = require('express');
-const logger = require('./logger');    // calling endpoint
+const _ = require('lodash');
 
+const logger = require('../logger/logger');    // calling endpoint
+const helpers = require('../util/helper')
+const format = require('../validator/formatter')
 
 const router = express.Router();
 
+
 router.get('/test-me', function (req, res) {
-    console.log('Console to be displayed in terminal');
-    res.send('My zeroth ever api!')
-});
-
-router.get('/test-me2', function (req, res) {
-    res.send('My first ever api!')
-});
-
-router.get('/test-me3', function (req, res) {
-    console.log('the end point value is ', logger.url); 
-    console.log('calling a function');
+    //For logger file
     logger.logging();        // calling a function
-    res.send('My second ever api!')
-});
+    res.send('My first Api!')
 
-router.get('/test-me4', function (req, res) {
-    res.send('My third ever api!')
-});
+    //For helper file
+    helpers.printDate();
+    helpers.printMonth();
+    helpers.getBatchInfo();
 
-router.get('/test-me5', function (req, res) {
-    res.send('My fourth ever api!')
+    // For formatter file
+    format.trimming();
+    
+});
+router.get('/hello', function (req, res) {
+ /*****4th ques (A) ******************/
+    const month = 
+    [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'  
+    ]
+   
+    console.log(_.chunk(month, 4));
+
+    res.send('My first Api!');
+
+
+/*****4th ques (B) ******************/
+    const oddNum = [1,3,5,7,9,11,13,15,17,19];
+    console.log(_.tail(oddNum));
+
+
+/*****4th ques (C) ******************/
+    const arr1 = [1,2,3,45,5];
+    const arr2 = [11,10,3,45,5];
+    const arr3 = [1,20,3,45,5];
+    const arr4 = [15,21,35,45,5];
+    const arr5 = [1,20,30,45,5];
+
+    console.log(_.union(arr1,arr2,arr3,arr4,arr5));
+
+    /*****$th ques (D) ******************/
+
+    let createObj = [
+        ['name', 'Gautam'], 
+        ['live', 'Bihar'], 
+        ['used', 'nodejs']
+    ]
+      
+    let obj = _.fromPairs(createObj);
+      
+    console.log(obj)
+
 });
 
 
