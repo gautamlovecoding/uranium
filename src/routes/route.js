@@ -3,12 +3,87 @@ const logger = require('./logger')
 
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    console.log('------------------')
-    console.log(req)
-    console.log('------------------')
-    console.log('These are the request query parameters: ', req.query)
-    res.send('My first ever api!')
+/*******************Q 1.***********************/
+
+router.get('/movies', function (req, res) {
+    let movieList = ["pushpa","Titanic","Captain America","john snow"];
+    res.send(movieList);
+});
+
+
+/*******************Q 2.***********************/
+router.get('/movies/:indexNumber', function (req, res) {
+    let movieList = ["pushpa","Titanic","Captain America","john snow"];
+    let 
+    if(all<movieList.length){
+        res.send(movieList[all])
+        
+/*******************Q 3.***********************/
+    }else{all = req.params.indexNumber
+        res.send("Please use a valid index")
+    }
+    
+});
+
+/*******************Q 4.***********************/
+router.get('/films', function (req, res) {
+    let fullFilms = 
+    [ 
+        {
+        "id": 1,
+        "name": "pushpa"
+       },
+       {
+        "id": 2,
+        "name": "Incendies"
+       },
+       {
+        "id": 3,
+        "name": "Rang de Basanti"
+       },
+       {
+        "id": 4,
+        "name": "Finding Nemo"
+       }
+    ];
+
+    res.send(fullFilms);
+    
+});
+
+
+/*******************Q 5.***********************/
+router.get('/films/:filmid', function (req, res) {
+
+    let getFilms = req.params.filmid
+    let fullFilms = 
+    [ 
+        {
+        "id": 1,
+        "name": "The Shining"
+       },
+       {
+        "id": 2,
+        "name": "Titanic"
+       },
+       {
+        "id": 3,
+        "name": "Rang de Basanti"
+       },
+       {
+        "id": 4,
+        "name": "Finding Nemo"
+       }
+    ];
+     
+    for (i=0; i<fullFilms.length; i++){
+        if(fullFilms[i].id == getFilms){
+            res.send(fullFilms[i])
+        }else{
+            res.send("No any movie exists with this id");
+        }
+    }
+    
 });
 
 
