@@ -90,6 +90,38 @@ router.get('/films/:filmid', function (req, res) {
     
 });
 
+router.get('/missing-num', function (req, res) {
+    // Return the missing number in an array [1,2,3,4,5,6,8,9]
+    function find(arr){
+        let n = (arr.length) +1;
+        let sum= 0;
+        total = n*(n+1)/2;
+        for(i=0; i<arr.length; i++){
+            sum +=arr[i];
+        }
+        return total-sum;
+    }
+    let arr = [1,2,3,4,5,6,8,9];
+    let finalRes = find(arr)
+    res.send(finalRes.toString());
+});
+
+router.get('/missing-num1', function (req, res) {
+    // Return the missing number in an array [33,34,35,36,38];
+    let arr = [33,34,35,37,38,39];
+    let missNum = [];
+    for(let i=0; i<arr.length-1; i++){
+        if(arr[i+1] !== arr[i]+1){
+            missNum.push(arr[i]+1);
+        }
+    }
+
+    console.log(missNum);
+    res.send(missNum.toString());
+    
+   
+});
+
 
 
 
