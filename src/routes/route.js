@@ -55,33 +55,37 @@ router.get('/films', function (req, res) {
 /*******************Q 5.***********************/
 router.get('/films/:filmid', function (req, res) {
 
-    let getFilms = req.params.filmid
     let fullFilms = 
     [ 
         {
-        "id": 1,
-        "name": "The Shining"
-       },
-       {
-        "id": 2,
-        "name": "Titanic"
-       },
-       {
-        "id": 3,
-        "name": "Rang de Basanti"
-       },
-       {
-        "id": 4,
-        "name": "Finding Nemo"
-       }
+            "id": 1,
+            "name": "The Shining"
+        },
+        {
+            "id": 2,
+            "name": "Titanic"
+        },
+        {
+            "id": 30,
+            "name": "Rang de Basanti"
+        },
+        {
+            "id": 4,
+            "name": "Finding Nemo"
+        }
     ];
-     
+    
+    let getFilms = req.params.filmid
+    let inc = 0;
     for (i=0; i<fullFilms.length; i++){
         if(fullFilms[i].id == getFilms){
             res.send(fullFilms[i])
         }else{
-            res.send("No any movie exists with this id");
+            inc +=1;
         }
+    }
+    if (inc>0){
+        res.send("No movie exist with this id.")
     }
     
 });
