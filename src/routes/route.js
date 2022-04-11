@@ -1,5 +1,5 @@
 const express = require('express');
-const userModel = require("../models/userModal")
+const userModel = require("../models/userModel")
 const userController = require("../controllers/userController")
 const router = express.Router();
 
@@ -8,8 +8,8 @@ router.get('/test-me', function (req, res) {
     res.send( {  msg: "hi guys"  }   )
 });
 
-router.post('/createUser', userController.createUser);
+router.post('/createNewBooks', userController.createNewBooks);
 
-router.get('/getUsersData', userController.getUsersData);
+router.get('/getListsOfBooks', userController.getListsOfBooks);
 
 module.exports = router;
