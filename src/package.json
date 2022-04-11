@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "mongoose": "^6.2.10",
     "nodeman": "^1.1.2"
   }
 }
