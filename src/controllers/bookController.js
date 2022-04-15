@@ -1,23 +1,28 @@
-const authorModel = require("../models/authorModel")
-const bookModel= require("../models/bookModel")
+const authorModel = require("../model.js/authorModel")
+const bookModel = require("../model.js/bookModel")
+const publisherModel = require("../model.js/publisherModel")
 
-const createBook= async function (req, res) {
+const createnewBook = async function (req, res) {
     let book = req.body
-    let bookCreated = await bookModel.create(book)
-    res.send({data: bookCreated})
+    if (book.author && book.publisher) {
+        let authIdCheck = await authorModel.exists({ _id: book.author })
+        let publIdCheck = await publisherModel.exists({ _id: book.publisher })
+        if (authIdCheck && publIdCheck) {
+            if (!await bookModel.exists(book)) {
+                let bookCreated = await bookModel.create(book)
+                res.send({ msg: bookCreated })
+            } else res.send({ msg: "Book already exists" })
+        }
+        else res.send("AuthorId and publisherId both or any one of these are Invalid")
+    }
+    else res.send ({msg: "Author and publisher Must be present"})
 }
 
-const getBooksData= async function (req, res) {
-    let books = await bookModel.find()
-    res.send({data: books})
+const getBooksWithAuthAndPublDetails = async function(req, res){
+    let specificBook = await bookModel.find().populate('author').populate('publisher')
+    res.send ({msg: specificBook})
 }
 
-const getBooksWithAuthorDetails = async function (req, res) {
-    let specificBook = await bookModel.find().populate('author_id')
-    res.send({data: specificBook})
+module.exports.createnewBook = createnewBook
 
-}
-
-module.exports.createBook= createBook
-module.exports.getBooksData= getBooksData
-module.exports.getBooksWithAuthorDetails = getBooksWithAuthorDetails
+module.exports.getBooksWithAuthAndPublDetails = getBooksWithAuthAndPublDetails
