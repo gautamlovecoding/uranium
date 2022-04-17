@@ -23,6 +23,43 @@ const getBooksWithAuthAndPublDetails = async function(req, res){
     res.send ({msg: specificBook})
 }
 
+    const penguin = async function (req, res){
+        let peng_id = await bookModel.updateMany(
+            {publisher: "6259182220afd4459bab2edc"},
+            {$set:{isHardCover: true}},
+             {new:true}
+        )
+            res.send({msg: peng_id});
+    }
+
+    const harperCollins = async function (req, res){
+        let hcollin_id = await bookModel.updateMany(
+            {publisher: "625a80c3c001e3588a599bc1"},
+            {$set:{isHardCover: true}},
+             {new:true}
+        )
+            res.send({msg: hcollin_id});
+    }
+
+    const updateBook = async function(req, res){
+        let data = await bookModel.updateMany(
+            {rating:{$gt: 3.5}},
+            {$inc: {price:10}}
+        )
+        res.send({msg: data});
+    }
+
+    
+
+
 module.exports.createnewBook = createnewBook
 
 module.exports.getBooksWithAuthAndPublDetails = getBooksWithAuthAndPublDetails
+
+module.exports.penguin = penguin
+
+module.exports.harperCollins = harperCollins
+
+module.exports.updateBook = updateBook
+
+
