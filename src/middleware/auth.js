@@ -1,4 +1,5 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const userModel = require('../models/userModel');
 
 let mid1 = async function(req, res, next){
   try{
@@ -17,6 +18,11 @@ let mid1 = async function(req, res, next){
 
 
   if(userToBeModified != userLoggedIn) return res.status(403).send({status:false, msg: "Not allowed to logeed in requested other users data."})
+
+  let userId = req.params.userId;
+  let deletedUserAccount = await userModel.findById(userId)
+  let isDeleted = deletedUserAccount["isDeleted"]
+  if(isDeleted) return res.send({msg: "Requested account is deleted"})
 
     next();
   }
