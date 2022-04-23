@@ -8,8 +8,9 @@ let mid1 = async function(req, res, next){
   if (!token) return res.status(400).send( { status: false, msg: "token must be present"});
 
   let decodedToken = jwt.verify(token, "functionup-Uranium");
-  if (!decodedToken)
-    return res.status(400).send({ status: false, msg: "token is invalid" });
+   /*not execote it will throw an error and catch into catch block*/
+  // if (!decodedToken)
+  //   return res.status(400).send({ status: false, msg: "token is not valid" });
 
     let userToBeModified = req.params.userId
   let userLoggedIn = decodedToken.userId
@@ -20,7 +21,7 @@ let mid1 = async function(req, res, next){
     next();
   }
   catch(error){
-    res.status(500).send({msg: "Error", error: error.message})
+    res.status(500).send({msg: "Error", error: error})
   }
 }
 
