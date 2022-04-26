@@ -81,7 +81,8 @@ let getOtp = async function (req, res) {
 //1.  WRITE A GET API TO GET THE LIST OF ALL THE "vaccination sessions by district id" for any given district id and for any given date
 
 let VacByDistId = async function(req, res){
-    distId = req.query.district_id
+   try{
+     distId = req.query.district_id
     date = req.query.date
     let options = {
         method: "get",
@@ -91,11 +92,17 @@ let VacByDistId = async function(req, res){
     console.log(result.data)
     res.status(200).send({msg: result.data})
 }
+catch (err) {
+    console.log(err)
+    res.status(500).send({ msg: err.message })
+}
+}
 
 
 // get weather of London from http://api.openweathermap.org/data/2.5/weather?q=London&appid=<useYourOwnAppId>
 let getWeatherData = async function(req, res){
-    let places = req.query.q
+   try {
+       let places = req.query.q
     // let appId = req.query.appid
     let options = {
         method: "get",
@@ -108,6 +115,11 @@ let getWeatherData = async function(req, res){
     console.log(selectTemp);
     res.status(200).send({msg: selectTemp});
 }
+catch (err) {
+    console.log(err)
+    res.status(500).send({ msg: err.message })
+}
+}
 
 // - Sort the cities  ["Bengaluru","Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"] in order of their increasing temperature
 // result should look something like this
@@ -119,7 +131,9 @@ let getWeatherData = async function(req, res){
 // ]
 
 let incTempData = async function(req, res){
-    let cities = ["Bengaluru","Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"];
+try {
+    
+let cities = ["Bengaluru","Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"];
 
 let cityArr = [];
  for(let i=0; i<cities.length; i++){
@@ -140,6 +154,11 @@ let cityArr = [];
     }
     cityArr.sort(compare)
     res.status(200).send({msg: cityArr})
+}
+catch (err) {
+    console.log(err)
+    res.status(500).send({ msg: err.message })
+}
 
 }
 
@@ -178,7 +197,8 @@ let get_memes = async function (req, res) {
 
 
 const createMemes = async function(req, res){
-    let template_id = req.query.memeId
+  try {
+     let template_id = req.query.memeId
     let textLeft = req.query.textLeft
     let textRight = req.query.textRight
     let username = req.query.name
@@ -191,6 +211,11 @@ const createMemes = async function(req, res){
     let result = await axios(options)
     let data = result.data
     res.status(200).send({data: data})
+}
+catch (err) {
+    console.log(err)
+    res.status(500).send({ msg: err.message })
+}
 }
 
 
