@@ -30,7 +30,7 @@ const authorLogin = async(req, res) => {
         }
     }catch(error) {
         console.log(error);
-        res.status(400).send("invalid login Detailes")
+        res.status(400).send("invalid login Details")
     }
 }
 
