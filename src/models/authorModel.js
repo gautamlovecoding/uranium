@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const authorSchema = mongoose.Schema({ 
-    fname: {type: String, required: true, trim: true}, 
+    fname: {type: String, required: true, trim: true},  //
     lname: {type: String, required: true, trim: true}, 
     title: {type: String, enum: ["Mr", "Mrs", "Miss"], required: true}, 
     email: {
